@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - BinhSport</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login_reg.css') }}">
+</head>
+<body>
+    <header class="auth-header">
+        <a href="/" class="back-btn">← Quay lại trang chủ</a>
+    </header>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1>Đăng nhập</h1>
+            <p class="subtitle">Đăng nhập để tiếp tục mua sắm sản phẩm thể thao yêu thích của bạn.</p>
+
+            <form method="POST" action="/login">
+                <div class="form-group">
+                    <label for="email">Email hoặc tên đăng nhập</label>
+                    <input type="text" id="email" name="email" placeholder="Nhập email hoặc tên đăng nhập" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
+                </div>
+
+                <div class="form-actions">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Ghi nhớ tôi</label>
+                    </div>
+                    <a href="/forgot-password">Quên mật khẩu?</a>
+                </div>
+
+                <button type="submit" class="submit-btn">Đăng nhập</button>
+            </form>
+
+            <div class="auth-footer">
+                Chưa có tài khoản? <a href="/register">Đăng ký ngay</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

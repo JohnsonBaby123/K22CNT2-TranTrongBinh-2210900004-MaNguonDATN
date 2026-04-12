@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BinhSport | Thể thao &amp; Dụng cụ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="/"> <span>Binh</span>Sport</a>
+        <nav class="main-nav">
+            <div class="nav-item dropdown">
+                <a href="#catalog" class="dropdown-toggle">📂 Danh mục</a>
+                <div class="dropdown-menu">
+                    <a href="#catalog">🏸 Cầu lông</a>
+                    <a href="#catalog">🏓 Bóng bàn</a>
+                    <a href="#catalog">🎾 Tennis</a>
+                    <a href="#catalog">🏏 Pickleball</a>
+                </div>
+            </div>
+            <a href="#about">Về chúng tôi</a>
+        </nav>
+        <div class="header-actions">
+            <button class="cart-btn">🛒 Giỏ hàng</button>
+            <a class="btn login" href="/login">Đăng nhập</a>
+            <a class="btn signup" href="/register">Đăng ký</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-copy">
+            <div class="eyebrow"><span></span>Chuyên gia thể thao</div>
+            <h1>Trang thương mại điện tử BinhSport cho cầu lông, bóng bàn, tennis và pickleball.</h1>
+            <p>Khám phá bộ sưu tập dụng cụ thể thao chất lượng cao, thiết kế tinh tế, phù hợp cho cả người mới và vận động viên chuyên nghiệp.</p>
+            <div class="hero-actions">
+                <a class="btn signup" href="#catalog">Xem sản phẩm</a>
+                <a class="btn login" href="#about">Tìm hiểu thêm</a>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="hero-cards">
+                <div class="hero-card">
+                    <h3>Cầu lông</h3>
+                    <p>Vợt, shuttlecock và phụ kiện chính hãng cho mọi trình độ.</p>
+                </div>
+                <div class="hero-card">
+                    <h3>Bóng bàn</h3>
+                    <p>Bàn, vợt, bóng và lưới với độ bền cao, chuẩn thi đấu.</p>
+                </div>
+                <div class="hero-card">
+                    <h3>Tennis</h3>
+                    <p>Phụ kiện sân, vợt và giày chuyên dụng cho cú đánh hoàn hảo.</p>
+                </div>
+                <div class="hero-card">
+                    <h3>Pickleball</h3>
+                    <p>Thiết bị mới mẻ, dễ tiếp cận và rất thích hợp cho giải trí nhóm.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="catalog">
+        <div class="section-heading">
+            <div>
+                <h2>4 loại sản phẩm chủ lực</h2>
+                <p class="section-subtitle">Chúng tôi tập trung vào những dụng cụ thể thao được ưa chuộng nhất.</p>
+            </div>
+        </div>
+
+        <div class="categories">
+            <div class="category-card">
+                <div class="label"><span></span>Cầu lông</div>
+                <h3>Vợt &amp; Shuttlecock</h3>
+                <p>Nâng cấp cú đánh với vợt nhẹ nhàng và shuttlecock chuẩn quốc tế.</p>
+            </div>
+            <div class="category-card">
+                <div class="label"><span></span>Bóng bàn</div>
+                <h3>Phong cách thi đấu</h3>
+                <p>Đệm vợt, bóng cao cấp và bàn chống rung cho mọi giải đấu.</p>
+            </div>
+            <div class="category-card">
+                <div class="label"><span></span>Tennis</div>
+                <h3>Thể thao cá nhân</h3>
+                <p>Vợt cân bằng, phụ kiện bảo hộ và dây căng giúp bền hơn.</p>
+            </div>
+            <div class="category-card">
+                <div class="label"><span></span>Pickleball</div>
+                <h3>Trải nghiệm mới</h3>
+                <p>Cơ hội thử môn thể thao thú vị, thân thiện và dễ tiếp cận.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <div class="section-heading">
+            <h2>Về BinhSport</h2>
+            <p class="section-subtitle">Tạo dựng trải nghiệm mua sắm thể thao trực tuyến chuyên nghiệp.</p>
+        </div>
+        <p style="max-width:720px; color: var(--text-muted); line-height:1.8;">BinhSport mang đến bộ sưu tập dụng cụ thể thao được chọn lọc dành cho cầu lông, bóng bàn, tennis và pickleball. Chúng tôi hướng đến chất lượng, dịch vụ nhanh chóng và thiết kế trang web dễ dùng cho mọi khách hàng.</p>
+    </section>
+
+    <footer class="footer">
+        <p>© 2026 BinhSport. Thương mại điện tử dụng cụ thể thao.</p>
+        <p>Thiết kế đẹp mắt, rõ ràng và thân thiện với người dùng.</p>
+    </footer>
+</body>
+</html>
+'@;

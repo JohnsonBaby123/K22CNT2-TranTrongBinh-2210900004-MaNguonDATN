@@ -22,7 +22,7 @@
             <a href="#about">Về chúng tôi</a>
         </nav>
         <div class="header-actions">
-            <button class="cart-btn">🛒 Giỏ hàng</button>
+            <a href="/cart" class="cart-btn">🛒 Giỏ hàng <span id="cart-count" class="cart-count"></span></a>
             <a class="btn login" href="/login">Đăng nhập</a>
             <a class="btn signup" href="/register">Đăng ký</a>
         </div>
@@ -105,6 +105,8 @@
         <p>© 2026 BinhSport. Thương mại điện tử dụng cụ thể thao.</p>
         <p>Thiết kế đẹp mắt, rõ ràng và thân thiện với người dùng.</p>
     </footer>
+
+    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 </body>
 </html>
-'@;

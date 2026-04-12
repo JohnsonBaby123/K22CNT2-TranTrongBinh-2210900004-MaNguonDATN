@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 import mysql.connector
+import json
 
 app = Flask(__name__)
 
@@ -61,6 +62,43 @@ def forgot_password():
         # TODO: Xử lý quên mật khẩu (gửi email reset, ...)
         return render_template("login.html", message="Hướng dẫn đặt lại mật khẩu đã được gửi.")
     return render_template("forgot-password.html")
+
+# 🛒 Trang giỏ hàng
+@app.route("/cart")
+def cart():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        
+        cursor.execute("SELECT * FROM product")
+        products = cursor.fetchall()
+        
+        cursor.close()
+        conn.close()
+        
+        return render_template("cart.html", products=products)
+    except Exception as e:
+        return f"Lỗi kết nối DB: {e}"
+
+# 🔧 API: Lấy chi tiết sản phẩm
+@app.route("/api/product/<int:product_id>")
+def get_product(product_id):
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        
+        cursor.execute("SELECT * FROM product WHERE id = %s", (product_id,))
+        product = cursor.fetchone()
+        
+        cursor.close()
+        conn.close()
+        
+        if product:
+            return jsonify(product)
+        else:
+            return jsonify({"error": "Sản phẩm không tìm thấy"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)

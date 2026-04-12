@@ -21,6 +21,7 @@ body {
                 linear-gradient(180deg, #07101f 0%, #08131f 45%, #0b1220 100%);
     color: var(--text);
     min-height: 100vh;
+    line-height: 1.6;
 }
 
 a {
@@ -116,19 +117,7 @@ button:hover,
     z-index: 20;
 }
 
-.dropdown-menu a {
-    display: block;
-    padding: 0.75rem 1rem;
-    color: var(--text-muted);
-    font-size: 0.95rem;
-}
-
-.dropdown-menu a:hover {
-    background: rgba(255, 107, 53, 0.08);
-    color: var(--accent);
-}
-
-.nav-item.dropdown:hover .dropdown-menu {
+.nav-item.dropdown.active .dropdown-menu {
     display: block;
 }
 
@@ -144,6 +133,25 @@ button:hover,
     color: var(--accent);
     padding: 0.75rem 1.1rem;
     border-radius: 999px;
+    position: relative;
+    text-decoration: none;
+}
+
+.cart-count {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff6b35;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
 }
 
 .btn {
@@ -165,11 +173,13 @@ button:hover,
 .hero {
     width: min(1180px, calc(100% - 2rem));
     margin: 0 auto;
-    padding: 2rem 0 1rem;
+    padding: 4rem 0 6rem;
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
     gap: 2rem;
     align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-copy {
@@ -190,15 +200,18 @@ button:hover,
 
 .hero-copy h1 {
     font-size: clamp(2.7rem, 4vw, 4.2rem);
-    line-height: 1.02;
-    margin: 0;
+    line-height: 1.1;
+    margin: 0 0 0.5rem 0;
+    font-weight: 800;
+    letter-spacing: -0.02em;
 }
 
 .hero-copy p {
     margin: 1.5rem 0 2rem;
     max-width: 560px;
     color: var(--text-muted);
-    line-height: 1.75;
+    line-height: 1.7;
+    font-size: 1.1rem;
 }
 
 .hero-actions {
@@ -263,7 +276,9 @@ button:hover,
 .section {
     width: min(1180px, calc(100% - 2rem));
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 4rem 0;
+    position: relative;
+    z-index: 1;
 }
 
 .section-heading {
@@ -276,11 +291,15 @@ button:hover,
 
 .section-heading h2 {
     margin: 0;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.2;
 }
 
 .section-subtitle {
     color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 1.1rem;
 }
 
 .categories {
@@ -366,7 +385,7 @@ button:hover,
 .footer {
     width: min(1180px, calc(100% - 2rem));
     margin: 0 auto 2rem;
-    padding: 1.5rem 0 0;
+    padding: 3rem 0 2rem;
     border-top: 1px solid rgba(255,255,255,0.08);
     color: var(--text-muted);
     font-size: 0.95rem;
@@ -374,14 +393,31 @@ button:hover,
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 0.75rem;
+    position: relative;
+    z-index: 1;
 }
 
 @media (max-width: 980px) {
     .hero {
         grid-template-columns: 1fr;
+        padding: 3rem 0 4rem;
+        gap: 3rem;
     }
 
-    .categories,
+    .hero-copy {
+        text-align: center;
+        max-width: none;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .categories {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+    }
+
     .product-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -400,6 +436,26 @@ button:hover,
     }
 
     .hero-visual {
+        min-height: 320px;
+        padding: 1rem;
+    }
+
+    .hero-card {
+        min-height: 140px;
+        padding: 1rem;
+    }
+
+    .categories,
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .category-card,
+    .product-card {
+        min-height: 160px;
+    }
+}
         min-height: 320px;
     }
 

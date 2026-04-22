@@ -183,6 +183,28 @@
     font-size: 14px;
 }
 
+.item-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pay-now-btn {
+    padding: 8px 12px;
+    background: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+.pay-now-btn:hover {
+    background: #1e3a8a;
+    border-color: #1e3a8a;
+}
+
 .remove-btn:hover {
     background: var(--danger-color);
     color: white;
@@ -525,7 +547,8 @@
         padding: 15px;
     }
 
-    .remove-btn {
+    .remove-btn,
+    .pay-now-btn {
         width: 100%;
     }
 }

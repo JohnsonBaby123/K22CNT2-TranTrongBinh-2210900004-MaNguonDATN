@@ -32,7 +32,7 @@ function addToCart(productId, productName, productPrice, quantity = 1) {
     }
     
     saveCart(cart);
-    showNotification(`Đã thêm "${productName}" vào giỏ hàng!`);
+    showCartNotification(`Đã thêm ${quantity} "${productName}" vào giỏ hàng`);
 }
 
 // Remove product from cart
@@ -40,6 +40,19 @@ function removeFromCart(productId) {
     let cart = getCart();
     cart = cart.filter(item => item.id !== productId);
     saveCart(cart);
+}
+
+// Checkout one selected item
+function checkoutSingleItem(productId) {
+    const cart = getCart();
+    const selectedItem = cart.find(item => item.id === productId);
+
+    if (!selectedItem) {
+        showNotification('Không tìm thấy sản phẩm để thanh toán');
+        return;
+    }
+
+    window.location.href = `/checkout?mode=single&id=${encodeURIComponent(productId)}`;
 }
 
 // Update quantity for product
@@ -62,15 +75,24 @@ function updateCartDisplay() {
     const cart = getCart();
     const cartItemsContainer = document.getElementById('cartItems');
     const emptyCartMessage = document.getElementById('emptyCart');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    const totalItemsEl = document.getElementById('totalItems');
+    const subtotalEl = document.getElementById('subtotal');
+    const totalEl = document.getElementById('total');
+
+    // Nếu không phải trang cart thì chỉ bỏ qua phần render chi tiết
+    if (!cartItemsContainer || !emptyCartMessage || !checkoutBtn || !totalItemsEl || !subtotalEl || !totalEl) {
+        return;
+    }
     
     if (cart.length === 0) {
         cartItemsContainer.style.display = 'none';
         emptyCartMessage.style.display = 'block';
-        document.getElementById('checkoutBtn').disabled = true;
+        checkoutBtn.disabled = true;
     } else {
         cartItemsContainer.style.display = 'block';
         emptyCartMessage.style.display = 'none';
-        document.getElementById('checkoutBtn').disabled = false;
+        checkoutBtn.disabled = false;
         renderCartItems(cart);
     }
     
@@ -104,7 +126,10 @@ function renderCartItems(cart) {
                 <p class="price">${formatPrice(item.price * item.quantity)}</p>
             </div>
             
-            <button class="remove-btn" onclick="removeFromCart(${item.id})">🗑️ Xóa</button>
+            <div class="item-actions">
+                <button class="pay-now-btn" onclick="checkoutSingleItem(${item.id})">Thanh toán ngay</button>
+                <button class="remove-btn" onclick="removeFromCart(${item.id})">🗑️ Xóa</button>
+            </div>
         `;
         
         cartItemsContainer.appendChild(cartItem);
@@ -221,6 +246,39 @@ function showNotification(message) {
     }, 3000);
 }
 
+// Thông báo thêm giỏ hàng dùng riêng để luôn hiển thị ổn định
+function showCartNotification(message) {
+    const notification = document.createElement('div');
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 12px 16px;
+        background: #10b981;
+        color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+        font-weight: 600;
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    `;
+
+    document.body.appendChild(notification);
+    requestAnimationFrame(() => {
+        notification.style.opacity = '1';
+        notification.style.transform = 'translateY(0)';
+    });
+
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateY(-8px)';
+        setTimeout(() => notification.remove(), 220);
+    }, 1800);
+}
+
 // ===== PRODUCT SUGGESTION =====
 function quickAddProduct() {
     const select = document.getElementById('productSelect');
@@ -251,8 +309,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const checkoutBtn = document.getElementById('checkoutBtn');
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', function() {
-            alert('Chức năng thanh toán sẽ được phát triển sớm!');
-            // TODO: Implement checkout functionality
+            window.location.href = '/checkout';
         });
     }
 });

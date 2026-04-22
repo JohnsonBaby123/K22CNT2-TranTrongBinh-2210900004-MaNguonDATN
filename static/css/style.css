@@ -335,6 +335,14 @@ button:hover,
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 0.75rem;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 107, 53, 0.35);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
 }
 
 .category-card .label {
@@ -363,6 +371,7 @@ button:hover,
 .product-card p {
     color: var(--text-muted);
     line-height: 1.6;
+    margin: 0;
 }
 
 .category-image {
@@ -534,10 +543,3 @@ button:hover,
         min-height: 160px;
     }
 }
-        min-height: 320px;
-        
-    .categories,
-    .product-grid {
-        grid-template-columns: 1fr;
-    }
-

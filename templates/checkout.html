@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán | BinhSport</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/checkout.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="/"> <span>Binh</span>Sport</a>
+        <nav class="main-nav">
+            <a href="/">Trang chủ</a>
+            <a href="/cart">Giỏ hàng</a>
+        </nav>
+        <div class="header-actions">
+            {% if session.get('user_id') %}
+                <span class="btn login">Xin chào, {{ session.get('username') }}</span>
+                <a class="btn signup" href="/logout">Đăng xuất</a>
+            {% else %}
+                <a class="btn login" href="/login">Đăng nhập</a>
+                <a class="btn signup" href="/register">Đăng ký</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <main class="checkout-page">
+        <section class="checkout-card">
+            <h1>Trang thanh toán</h1>
+            <p class="subtitle">Vui lòng kiểm tra lại sản phẩm trước khi xác nhận đơn hàng.</p>
+
+            <div id="checkoutEmpty" class="empty-message" style="display: none;">
+                Không có sản phẩm để thanh toán.
+                <a href="/cart">Quay lại giỏ hàng</a>
+            </div>
+
+            <div id="checkoutContent" style="display: none;">
+                <div id="checkoutItems" class="checkout-items"></div>
+
+                <div class="checkout-summary">
+                    <div class="row">
+                        <span>Tổng sản phẩm</span>
+                        <strong id="summaryQuantity">0</strong>
+                    </div>
+                    <div class="row total">
+                        <span>Tổng thanh toán</span>
+                        <strong id="summaryTotal">0₫</strong>
+                    </div>
+                </div>
+
+                <button id="placeOrderBtn" class="btn-order">Xác nhận đặt hàng</button>
+                <a href="/cart" class="back-link">← Quay lại giỏ hàng</a>
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/checkout.js') }}"></script>
+</body>
+</html>

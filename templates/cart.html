@@ -12,7 +12,7 @@
         <a class="brand" href="/"> <span>Binh</span>Sport</a>
         <nav class="main-nav">
             <div class="nav-item dropdown">
-                <a href="#catalog" class="dropdown-toggle">📂 Danh mục</a>
+                <a href="#catalog" class="dropdown-toggle">📂 Danh mục sản phẩm</a>
                 <div class="dropdown-menu">
                     <a href="/products/cau-long">🏸 Cầu lông</a>
                     <a href="/products/bong-ban">🏓 Bóng bàn</a>
@@ -24,15 +24,20 @@
         </nav>
         <div class="header-actions">
             <a href="/cart" class="cart-btn">🛒 Giỏ hàng <span id="cart-count" class="cart-count"></span></a>
-            <a class="btn login" href="/login">Đăng nhập</a>
-            <a class="btn signup" href="/register">Đăng ký</a>
+            {% if session.get('user_id') %}
+                <span class="btn login">Xin chào, {{ session.get('username') }}</span>
+                <a class="btn signup" href="/logout">Đăng xuất</a>
+            {% else %}
+                <a class="btn login" href="/login">Đăng nhập</a>
+                <a class="btn signup" href="/register">Đăng ký</a>
+            {% endif %}
         </div>
     </header>
 
     <section class="cart-hero">
-        <div class="cart-hero-content">
-            <h1>Giỏ hàng của bạn</h1>
-            <p>Xem lại và quản lý các sản phẩm đã chọn</p>
+        <div class="cart-hero-content" style="max-width: 720px; margin: 0 auto; text-align: center; padding: 0 1rem;">
+            <h1 style="margin-bottom: 0.75rem;">Giỏ hàng của bạn</h1>
+            <p style="margin: 0;">Xem lại và quản lý các sản phẩm đã chọn</p>
         </div>
     </section>
 

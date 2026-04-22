@@ -53,17 +53,6 @@ class IndexPage {
             }
         });
 
-        // Category card hover effects
-        const categoryCards = document.querySelectorAll('.category-card');
-        categoryCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-5px)';
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0)';
-            });
-        });
-
         // Hero card animations
         const heroCards = document.querySelectorAll('.hero-card');
         heroCards.forEach((card, index) => {

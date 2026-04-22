@@ -16,6 +16,12 @@
             <h1>Đăng ký</h1>
             <p class="subtitle">Tạo tài khoản mới và bắt đầu mua sắm tại BinhSport.</p>
 
+            {% if error %}
+                <div style="margin: 0.75rem 0 1rem; padding: 0.75rem 1rem; border-radius: 10px; background: rgba(239, 68, 68, 0.12); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.35);">
+                    {{ error }}
+                </div>
+            {% endif %}
+
             <form method="POST" action="/register">
                 <div class="form-row">
                     <div class="form-group">

@@ -11,7 +11,7 @@
         <a class="brand" href="/"> <span>Binh</span>Sport</a>
         <nav class="main-nav">
             <div class="nav-item dropdown">
-                <a href="#catalog" class="dropdown-toggle">Danh mục sản phẩm</a>
+                <a href="#catalog" class="dropdown-toggle">📂 Danh mục sản phẩm</a>
                 <div class="dropdown-menu">
                     <a href="/products/cau-long">🏸 Cầu lông</a>
                     <a href="/products/bong-ban">🏓 Bóng bàn</a>
@@ -23,8 +23,13 @@
         </nav>
         <div class="header-actions">
             <a href="/cart" class="cart-btn">🛒 Giỏ hàng <span id="cart-count" class="cart-count"></span></a>
-            <a class="btn login" href="/login">Đăng nhập</a>
-            <a class="btn signup" href="/register">Đăng ký</a>
+            {% if session.get('user_id') %}
+                <span class="btn login">Xin chào, {{ session.get('username') }}</span>
+                <a class="btn signup" href="/logout">Đăng xuất</a>
+            {% else %}
+                <a class="btn login" href="/login">Đăng nhập</a>
+                <a class="btn signup" href="/register">Đăng ký</a>
+            {% endif %}
         </div>
     </header>
 

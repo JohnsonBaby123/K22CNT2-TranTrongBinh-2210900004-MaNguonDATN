@@ -16,7 +16,8 @@
             <h1>Đăng nhập</h1>
             <p class="subtitle">Đăng nhập để tiếp tục mua sắm sản phẩm thể thao yêu thích của bạn.</p>
 
-            <form method="POST" action="/login">
+            <form method="POST" action="{{ url_for('login', next=request.args.get('next')) }}">
+                <input type="hidden" name="next" value="{{ request.args.get('next', '') }}">
                 <div class="form-group">
                     <label for="email">Email hoặc tên đăng nhập</label>
                     <input type="text" id="email" name="email" placeholder="Nhập email hoặc tên đăng nhập" required>

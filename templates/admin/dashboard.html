@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - BinhSport</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f1419;
+            color: #e0e0e0;
+        }
+
+        .admin-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: #1a1f2e;
+            border-right: 1px solid #2a3342;
+            overflow-y: auto;
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .sidebar-brand {
+            padding: 0 1.5rem 2rem;
+            border-bottom: 1px solid #2a3342;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-brand h1 {
+            font-size: 1.5rem;
+            color: #ff6b35;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-brand p {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin: 0;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: rgba(255, 107, 53, 0.1);
+            color: #ff6b35;
+            border-left-color: #ff6b35;
+        }
+
+        .sidebar-menu a::before {
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-user {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            border-top: 1px solid #2a3342;
+            background: #151a25;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b35, #ff8c42);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 0.75rem;
+        }
+
+        .user-details {
+            flex: 1;
+        }
+
+        .user-details p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .user-details .username {
+            font-weight: 600;
+            color: #e0e0e0;
+        }
+
+        .user-details .role {
+            font-size: 0.8rem;
+            color: #ff6b35;
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid #ef4444;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #ef4444;
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topbar {
+            background: #1a1f2e;
+            border-bottom: 1px solid #2a3342;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topbar h2 {
+            font-size: 1.5rem;
+            color: #e0e0e0;
+        }
+
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: #1a1f2e;
+            border: 1px solid #2a3342;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #ff6b35;
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.1);
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6b35;
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            opacity: 0.5;
+            margin-top: 0.5rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #e0e0e0;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title a {
+            color: #ff6b35;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .section-title a:hover {
+            text-decoration: underline;
+        }
+
+        /* Tables */
+        .table-container {
+            background: #1a1f2e;
+            border: 1px solid #2a3342;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #151a25;
+            border-bottom: 2px solid #2a3342;
+        }
+
+        th {
+            padding: 1rem;
+            text-align: left;
+            color: #888;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #2a3342;
+            color: #b0b0b0;
+        }
+
+        tr:hover {
+            background: rgba(255, 107, 53, 0.05);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: rgba(234, 179, 8, 0.1);
+            color: #eab308;
+        }
+
+        .status-completed {
+            background: rgba(74, 222, 128, 0.1);
+            color: #4ade80;
+        }
+
+        .status-cancelled {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+
+        .action-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #ff6b35;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .action-btn:hover {
+            background: #ff8c42;
+        }
+
+        .action-btn.edit-btn {
+            background: #3b82f6;
+        }
+
+        .action-btn.edit-btn:hover {
+            background: #2563eb;
+        }
+
+        .action-btn.delete-btn {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+        }
+
+        .action-btn.delete-btn:hover {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        .row-actions {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #888;
+        }
+
+        .empty-state p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 1000;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h1>🏸 BinhSport</h1>
+                <p>Admin Dashboard</p>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li><a href="/admin/dashboard" class="active">📊 Dashboard</a></li>
+                <li><a href="/admin/products">📦 Sản phẩm</a></li>
+                <li><a href="/admin/orders">📋 Đơn hàng</a></li>
+                <li><a href="/admin/users">👥 Người dùng</a></li>
+            </ul>
+
+            <div class="sidebar-user">
+                <div class="user-info">
+                    <div class="user-avatar">{{ username[0].upper() }}</div>
+                    <div class="user-details">
+                        <p class="username">{{ username }}</p>
+                        <p class="role">Quản trị viên</p>
+                    </div>
+                </div>
+                <form action="/logout" method="get">
+                    <button type="submit" class="logout-btn">Đăng xuất</button>
+                </form>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="topbar">
+                <h2>Dashboard</h2>
+                <div>Chào mừng, {{ username }}! 👋</div>
+            </div>
+
+            <div class="content">
+                <div class="quick-actions">
+                    <a href="/admin/products" class="action-btn">+ Thêm sản phẩm</a>
+                    <a href="/admin/products" class="action-btn edit-btn">Sửa sản phẩm</a>
+                    <a href="/admin/products" class="action-btn delete-btn">Xóa sản phẩm</a>
+                </div>
+
+                <!-- Statistics -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Tổng Sản phẩm</div>
+                        <div class="stat-value">{{ total_products }}</div>
+                        <div class="stat-icon">📦</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Tổng Người dùng</div>
+                        <div class="stat-value">{{ total_users }}</div>
+                        <div class="stat-icon">👥</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Tổng Đơn hàng</div>
+                        <div class="stat-value">{{ total_orders }}</div>
+                        <div class="stat-icon">📋</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Tổng Doanh thu</div>
+                        <div class="stat-value">{{ "{:,.0f}".format(total_revenue) }}đ</div>
+                        <div class="stat-icon">💰</div>
+                    </div>
+                </div>
+
+                <!-- Recent Products -->
+                <div class="section">
+                    <div class="section-title">
+                        <span>📦 Sản phẩm Gần đây</span>
+                        <a href="/admin/products">Xem tất cả →</a>
+                    </div>
+                    <div class="table-container">
+                        {% if products %}
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Danh mục</th>
+                                    <th>Giá</th>
+                                    <th>Tồn kho</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for product in products %}
+                                <tr>
+                                    <td>#{{ product.id }}</td>
+                                    <td>{{ product.name }}</td>
+                                    <td>{{ product.category_name or 'N/A' }}</td>
+                                    <td>{{ "{:,.0f}".format(product.price) }}đ</td>
+                                    <td>{{ product.stock }}</td>
+                                    <td>
+                                        <div class="row-actions">
+                                            <a href="/admin/products" class="action-btn edit-btn">Sửa</a>
+                                            <a href="/admin/products" class="action-btn delete-btn">Xóa</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% else %}
+                        <div class="empty-state">
+                            <p>Không có sản phẩm nào</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="section">
+                    <div class="section-title">
+                        <span>📋 Đơn hàng Gần đây</span>
+                        <a href="/admin/orders">Xem tất cả →</a>
+                    </div>
+                    <div class="table-container">
+                        {% if orders %}
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Khách hàng</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in orders %}
+                                <tr>
+                                    <td>#{{ order.id }}</td>
+                                    <td>{{ order.username or 'Unknown' }}</td>
+                                    <td>{{ "{:,.0f}".format(order.total_price) }}đ</td>
+                                    <td>
+                                        <span class="status-badge status-{{ order.status.lower() }}">
+                                            {{ order.status }}
+                                        </span>
+                                    </td>
+                                    <td>{{ order.created_at }}</td>
+                                    <td>
+                                        <div class="row-actions">
+                                            <a href="/admin/orders" class="action-btn edit-btn">Sửa</a>
+                                            <a href="/admin/orders" class="action-btn delete-btn">Xóa</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% else %}
+                        <div class="empty-state">
+                            <p>Không có đơn hàng nào</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

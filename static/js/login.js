@@ -180,10 +180,7 @@ class LoginForm {
                 return;
             }
 
-            // Show loading state
-            this.setLoading(true);
-
-            // Simulate API call (replace with actual login logic)
+            // Thu thập dữ liệu để xử lý tính năng "ghi nhớ tôi"
             const formData = new FormData(this.form);
             const loginData = {
                 email: formData.get('email'),
@@ -198,27 +195,26 @@ class LoginForm {
                 this.clearSavedCredentials();
             }
 
-            // Simulate network delay
-            await this.delay(1500);
-
-            // For demo purposes, accept any email/password combination
-            // In real app, this would be an actual API call
-            if (loginData.email && loginData.password) {
-                this.showSuccess('Đăng nhập thành công! Đang chuyển hướng...');
-
-                // Redirect after success
-                setTimeout(() => {
-                    window.location.href = '/';
-                }, 1500);
-            } else {
-                throw new Error('Thông tin đăng nhập không hợp lệ');
+            // Chỉ đổi trạng thái nút submit để tránh double click,
+            // không disable input vì input disabled sẽ không được gửi lên server.
+            if (this.submitBtn) {
+                this.submitBtn.disabled = true;
+                this.submitBtn.textContent = 'Đang đăng nhập...';
             }
+
+            // Submit thật về backend Flask để server quyết định redirect
+            this.form.submit();
 
         } catch (error) {
             console.error('Login error:', error);
             this.showError(error.message || 'Đăng nhập thất bại. Vui lòng thử lại.');
         } finally {
-            this.setLoading(false);
+            // Trường hợp submit thất bại ở client-side exception,
+            // khôi phục lại trạng thái nút.
+            if (this.submitBtn) {
+                this.submitBtn.disabled = false;
+                this.submitBtn.textContent = 'Đăng nhập';
+            }
         }
     }
 
@@ -294,9 +290,6 @@ class LoginForm {
         }, type === 'error' ? 5000 : 3000);
     }
 
-    delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
 }
 
 // ===== UTILITY FUNCTIONS =====

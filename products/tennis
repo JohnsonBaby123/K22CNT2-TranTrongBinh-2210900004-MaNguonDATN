@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tennis | BinhSport</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/products.css">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="/"> <span>Binh</span>Sport</a>
+        <nav class="main-nav">
+            <div class="nav-item dropdown">
+                <a href="#catalog" class="dropdown-toggle">📂 Danh mục</a>
+                <div class="dropdown-menu">
+                    <a href="/products/cau-long">🏸 Cầu lông</a>
+                    <a href="/products/bong-ban">🏓 Bóng bàn</a>
+                    <a href="/products/tennis">🎾 Tennis</a>
+                    <a href="/products/pickleball">🏏 Pickleball</a>
+                </div>
+            </div>
+            <a href="/#about">Về chúng tôi</a>
+        </nav>
+        <div class="header-actions">
+            <a href="/cart" class="cart-btn">🛒 Giỏ hàng <span id="cart-count" class="cart-count"></span></a>
+            <a class="btn login" href="/login">Đăng nhập</a>
+            <a class="btn signup" href="/register">Đăng ký</a>
+        </div>
+    </header>
+
+    <section class="products-hero">
+        <div class="products-hero-content">
+            <h1>Tennis</h1>
+            <p>Khám phá bộ sưu tập đầy đủ về Tennis</p>
+        </div>
+    </section>
+
+    <section class="products-section">
+        <div class="products-container">
+            <div class="products-grid">
+                
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            
+                                <img src="/static/image/banner/BinhSport.png" alt="Wilson Pro Staff RF97">
+                            
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Wilson Pro Staff RF97</h3>
+                            <p class="product-description">Vợt tennis cao cấp, kiểm soát tốt, phù hợp người chơi chuyên nghiệp...</p>
+                            <div class="product-meta">
+                                <span class="product-price">5,500,000 ₫</span>
+                                
+                                    <span class="product-stock">Còn: 7</span>
+                                
+                            </div>
+                            
+                            <div class="product-actions">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn minus" data-product-id="21">−</button>
+                                    <input type="number" class="qty-input" data-product-id="21" value="1" min="1" max="7">
+                                    <button class="qty-btn plus" data-product-id="21">+</button>
+                                </div>
+                                
+                                    <button class="btn-add-cart" data-product-id="21" data-product-name="Wilson Pro Staff RF97" data-product-price="5500000.0">
+                                        🛒 Thêm vào giỏ
+                                    </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            
+                                <img src="/static/image/banner/BinhSport.png" alt="Babolat Pure Drive">
+                            
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Babolat Pure Drive</h3>
+                            <p class="product-description">Vợt thiên công, lực đánh mạnh, dễ sử dụng...</p>
+                            <div class="product-meta">
+                                <span class="product-price">4,800,000 ₫</span>
+                                
+                                    <span class="product-stock">Còn: 10</span>
+                                
+                            </div>
+                            
+                            <div class="product-actions">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn minus" data-product-id="22">−</button>
+                                    <input type="number" class="qty-input" data-product-id="22" value="1" min="1" max="10">
+                                    <button class="qty-btn plus" data-product-id="22">+</button>
+                                </div>
+                                
+                                    <button class="btn-add-cart" data-product-id="22" data-product-name="Babolat Pure Drive" data-product-price="4800000.0">
+                                        🛒 Thêm vào giỏ
+                                    </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            
+                                <img src="/static/image/banner/BinhSport.png" alt="Head Speed MP">
+                            
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Head Speed MP</h3>
+                            <p class="product-description">Vợt cân bằng giữa sức mạnh và kiểm soát...</p>
+                            <div class="product-meta">
+                                <span class="product-price">4,600,000 ₫</span>
+                                
+                                    <span class="product-stock">Còn: 9</span>
+                                
+                            </div>
+                            
+                            <div class="product-actions">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn minus" data-product-id="23">−</button>
+                                    <input type="number" class="qty-input" data-product-id="23" value="1" min="1" max="9">
+                                    <button class="qty-btn plus" data-product-id="23">+</button>
+                                </div>
+                                
+                                    <button class="btn-add-cart" data-product-id="23" data-product-name="Head Speed MP" data-product-price="4600000.0">
+                                        🛒 Thêm vào giỏ
+                                    </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            
+                                <img src="/static/image/banner/BinhSport.png" alt="Yonex Ezone 98">
+                            
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Yonex Ezone 98</h3>
+                            <p class="product-description">Vợt trợ lực tốt, dễ đánh, phù hợp nhiều trình độ...</p>
+                            <div class="product-meta">
+                                <span class="product-price">5,000,000 ₫</span>
+                                
+                                    <span class="product-stock">Còn: 8</span>
+                                
+                            </div>
+                            
+                            <div class="product-actions">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn minus" data-product-id="24">−</button>
+                                    <input type="number" class="qty-input" data-product-id="24" value="1" min="1" max="8">
+                                    <button class="qty-btn plus" data-product-id="24">+</button>
+                                </div>
+                                
+                                    <button class="btn-add-cart" data-product-id="24" data-product-name="Yonex Ezone 98" data-product-price="5000000.0">
+                                        🛒 Thêm vào giỏ
+                                    </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            
+                                <img src="/static/image/banner/BinhSport.png" alt="Prince Textreme Tour 100">
+                            
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Prince Textreme Tour 100</h3>
+                            <p class="product-description">Vợt nhẹ, linh hoạt, kiểm soát tốt...</p>
+                            <div class="product-meta">
+                                <span class="product-price">4,200,000 ₫</span>
+                                
+                                    <span class="product-stock">Còn: 6</span>
+                                
+                            </div>
+                            
+                            <div class="product-actions">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn minus" data-product-id="25">−</button>
+                                    <input type="number" class="qty-input" data-product-id="25" value="1" min="1" max="6">
+                                    <button class="qty-btn plus" data-product-id="25">+</button>
+                                </div>
+                                
+                                    <button class="btn-add-cart" data-product-id="25" data-product-name="Prince Textreme Tour 100" data-product-price="4200000.0">
+                                        🛒 Thêm vào giỏ
+                                    </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2026 BinhSport. Thương mại điện tử dụng cụ thể thao.</p>
+        <p>Thiết kế đẹp mắt, rõ ràng và thân thiện với người dùng.</p>
+    </footer>
+
+    <script src="/static/js/cart.js"></script>
+    <script src="/static/js/products.js"></script>
+</body>
+</html>

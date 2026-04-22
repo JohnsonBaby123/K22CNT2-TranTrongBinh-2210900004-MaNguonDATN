@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -11,15 +11,15 @@
         <a class="brand" href="/"> <span>Binh</span>Sport</a>
         <nav class="main-nav">
             <div class="nav-item dropdown">
-                <a href="#catalog" class="dropdown-toggle">📂 Danh mục</a>
+                <a href="#catalog" class="dropdown-toggle">Danh mục sản phẩm</a>
                 <div class="dropdown-menu">
-                    <a href="#catalog">🏸 Cầu lông</a>
-                    <a href="#catalog">🏓 Bóng bàn</a>
-                    <a href="#catalog">🎾 Tennis</a>
-                    <a href="#catalog">🏏 Pickleball</a>
+                    <a href="/products/cau-long">🏸 Cầu lông</a>
+                    <a href="/products/bong-ban">🏓 Bóng bàn</a>
+                    <a href="/products/tennis">🎾 Tennis</a>
+                    <a href="/products/pickleball">🏏 Pickleball</a>
                 </div>
             </div>
-            <a href="#about">Về chúng tôi</a>
+            <a href="#about">Giới thiệu</a>
         </nav>
         <div class="header-actions">
             <a href="/cart" class="cart-btn">🛒 Giỏ hàng <span id="cart-count" class="cart-count"></span></a>
@@ -27,6 +27,14 @@
             <a class="btn signup" href="/register">Đăng ký</a>
         </div>
     </header>
+
+    <!-- Banner Section - Thêm banner images ở đây -->
+    <section class="banner">
+        <div class="banner-container">
+        <img src="{{ url_for('static', filename='image/banner/BinhSport.png') }}" alt="Banner 1">
+
+        </div>
+    </section>
 
     <section class="hero">
         <div class="hero-copy">
@@ -70,26 +78,30 @@
         </div>
 
         <div class="categories">
-            <div class="category-card">
+            <a href="/products/cau-long" class="category-card">
+                <img src="{{ url_for('static', filename='image/products/cl1.jpg') }}" alt="Cầu lông" class="category-image">
                 <div class="label"><span></span>Cầu lông</div>
                 <h3>Vợt &amp; Shuttlecock</h3>
                 <p>Nâng cấp cú đánh với vợt nhẹ nhàng và shuttlecock chuẩn quốc tế.</p>
-            </div>
-            <div class="category-card">
+            </a>
+            <a href="/products/bong-ban" class="category-card">
+                <img src="{{ url_for('static', filename='image/products/bb1.jpg') }}" alt="Bóng bàn" class="category-image">
                 <div class="label"><span></span>Bóng bàn</div>
                 <h3>Phong cách thi đấu</h3>
                 <p>Đệm vợt, bóng cao cấp và bàn chống rung cho mọi giải đấu.</p>
-            </div>
-            <div class="category-card">
+            </a>
+            <a href="/products/tennis" class="category-card">
+                <img src="{{ url_for('static', filename='image/products/tn1.jpg') }}" alt="Tennis" class="category-image">
                 <div class="label"><span></span>Tennis</div>
                 <h3>Thể thao cá nhân</h3>
                 <p>Vợt cân bằng, phụ kiện bảo hộ và dây căng giúp bền hơn.</p>
-            </div>
-            <div class="category-card">
+            </a>
+            <a href="/products/pickleball" class="category-card">
+                <img src="{{ url_for('static', filename='image/products/pkb1.jpg') }}" alt="Pickleball" class="category-image">
                 <div class="label"><span></span>Pickleball</div>
                 <h3>Trải nghiệm mới</h3>
                 <p>Cơ hội thử môn thể thao thú vị, thân thiện và dễ tiếp cận.</p>
-            </div>
+            </a>
         </div>
     </section>
 
@@ -98,12 +110,38 @@
             <h2>Về BinhSport</h2>
             <p class="section-subtitle">Tạo dựng trải nghiệm mua sắm thể thao trực tuyến chuyên nghiệp.</p>
         </div>
-        <p style="max-width:720px; color: var(--text-muted); line-height:1.8;">BinhSport mang đến bộ sưu tập dụng cụ thể thao được chọn lọc dành cho cầu lông, bóng bàn, tennis và pickleball. Chúng tôi hướng đến chất lượng, dịch vụ nhanh chóng và thiết kế trang web dễ dùng cho mọi khách hàng.</p>
+        <div class="about-content">
+            <div class="about-text">
+                <p>BinhSport mang đến bộ sưu tập dụng cụ thể thao được chọn lọc dành cho cầu lông, bóng bàn, tennis và pickleball. Chúng tôi hướng đến chất lượng, dịch vụ nhanh chóng và thiết kế trang web dễ dùng cho mọi khách hàng.</p>
+                <p>Được thành lập với sứ mệnh hỗ trợ cộng đồng thể thao Việt Nam, BinhSport cam kết mang đến những sản phẩm chính hãng, giá cả cạnh tranh và trải nghiệm mua sắm liền mạch từ nhà.</p>
+            </div>
+            <div class="about-features">
+                <div class="feature">
+                    <div class="feature-icon">🏆</div>
+                    <h4>Chất lượng cao</h4>
+                    <p>Dụng cụ từ các thương hiệu uy tín, đảm bảo độ bền và hiệu suất.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🚚</div>
+                    <h4>Giao hàng nhanh</h4>
+                    <p>Dịch vụ vận chuyển toàn quốc trong 2-3 ngày làm việc.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💬</div>
+                    <h4>Hỗ trợ 24/7</h4>
+                    <p>Đội ngũ chăm sóc khách hàng luôn sẵn sàng tư vấn và giải đáp.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <h4>Thanh toán an toàn</h4>
+                    <p>Các phương thức thanh toán đa dạng và bảo mật cao.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <footer class="footer">
-        <p>© 2026 BinhSport. Thương mại điện tử dụng cụ thể thao.</p>
-        <p>Thiết kế đẹp mắt, rõ ràng và thân thiện với người dùng.</p>
+        <p>© 2026 BinhSport. Trang thương mại điện tử sản phẩm thể thao.</p>
     </footer>
 
     <script src="{{ url_for('static', filename='js/cart.js') }}"></script>

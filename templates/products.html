@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category_name }} | BinhSport</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/products.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="/"> <span>Binh</span>Sport</a>
+        <nav class="main-nav">
+            <div class="nav-item dropdown">
+                <a href="#catalog" class="dropdown-toggle">📂 Danh mục</a>
+                <div class="dropdown-menu">
+                    <a href="/products/cau-long">🏸 Cầu lông</a>
+                    <a href="/products/bong-ban">🏓 Bóng bàn</a>
+                    <a href="/products/tennis">🎾 Tennis</a>
+                    <a href="/products/pickleball">🏏 Pickleball</a>
+                </div>
+            </div>
+            <a href="/#about">Về chúng tôi</a>
+        </nav>
+        <div class="header-actions">
+            <a href="/cart" class="cart-btn">🛒 Giỏ hàng <span id="cart-count" class="cart-count"></span></a>
+            <a class="btn login" href="/login">Đăng nhập</a>
+            <a class="btn signup" href="/register">Đăng ký</a>
+        </div>
+    </header>
+
+    <section class="products-hero">
+        <div class="products-hero-content">
+            <h1>{{ category_name }}</h1>
+            <p>Khám phá bộ sưu tập đầy đủ về {{ category_name }}</p>
+        </div>
+    </section>
+
+    <section class="products-section">
+        <div class="products-container">
+            <div class="products-grid">
+                {% if products %}
+                    {% for product in products %}
+                    <div class="product-card">
+                        <div class="product-image">
+                            {% if product.image %}
+                                <img src="{{ url_for('static', filename='image/products/' + product.image) }}" alt="{{ product.name }}">
+                            {% else %}
+                                <img src="{{ url_for('static', filename='image/banner/BinhSport.png') }}" alt="{{ product.name }}">
+                            {% endif %}
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">{{ product.name }}</h3>
+                            <p class="product-description">{{ product.description[:120] if product.description else 'Sản phẩm chất lượng cao, phù hợp cho mọi trình độ.' }}</p>
+
+                            <div class="product-meta">
+                                <div class="product-price-section">
+                                    <span class="product-price">{{ "{:,.0f}".format(product.price) }} ₫</span>
+                                    {% if product.stock > 0 %}
+                                        <span class="product-stock">Còn: {{ product.stock }} sản phẩm</span>
+                                    {% else %}
+                                        <span class="product-stock out-of-stock">Hết hàng</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="product-actions">
+                                {% if product.stock > 0 %}
+                                    <div class="quantity-section">
+                                        <label for="qty-{{ product.id }}" class="quantity-label">Số lượng:</label>
+                                        <div class="quantity-selector">
+                                            <button class="qty-btn minus" data-product-id="{{ product.id }}" aria-label="Giảm số lượng">-</button>
+                                            <input type="number" id="qty-{{ product.id }}" class="qty-input" data-product-id="{{ product.id }}" value="1" min="1" max="{{ product.stock }}" aria-label="Số lượng sản phẩm">
+                                            <button class="qty-btn plus" data-product-id="{{ product.id }}" aria-label="Tăng số lượng">+</button>
+                                        </div>
+                                    </div>
+                                    <button class="btn-add-cart" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}" data-product-price="{{ product.price }}">
+                                        🛒 Thêm vào giỏ hàng
+                                    </button>
+                                {% else %}
+                                    <button class="btn-add-cart disabled" disabled>
+                                        Hết hàng
+                                    </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-products">
+                        <p>Không có sản phẩm nào trong danh mục này.</p>
+                        <a href="/" class="btn signup">Quay lại trang chủ</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2026 BinhSport. Thương mại điện tử dụng cụ thể thao.</p>
+        <p>Thiết kế đẹp mắt, rõ ràng và thân thiện với người dùng.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/products.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cầu lông | BinhSport</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/products.css">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="/"> <span>Binh</span>Sport</a>
+        <nav class="main-nav">
+            <div class="nav-item dropdown">
+                <a href="#catalog" class="dropdown-toggle">📂 Danh mục</a>
+                <div class="dropdown-menu">
+                    <a href="/products/cau-long">🏸 Cầu lông</a>
+                    <a href="/products/bong-ban">🏓 Bóng bàn</a>
+                    <a href="/products/tennis">🎾 Tennis</a>
+                    <a href="/products/pickleball">🏏 Pickleball</a>
+                </div>
+            </div>
+            <a href="/#about">Về chúng tôi</a>
+        </nav>
+        <div class="header-actions">
+            <a href="/cart" class="cart-btn">🛒 Giỏ hàng <span id="cart-count" class="cart-count"></span></a>
+            <a class="btn login" href="/login">Đăng nhập</a>
+            <a class="btn signup" href="/register">Đăng ký</a>
+        </div>
+    </header>
+
+    <section class="products-hero">
+        <div class="products-hero-content">
+            <h1>Cầu lông</h1>
+            <p>Khám phá bộ sưu tập đầy đủ về Cầu lông</p>
+        </div>
+    </section>
+
+    <section class="products-section">
+        <div class="products-container">
+            <div class="products-grid">
+                
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            
+                                <img src="/static/image/products/cl1.jpg" alt="Yonex Astrox 99">
+                            
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Yonex Astrox 99</h3>
+                            <p class="product-description">Vợt thiên công mạnh...
+                            <div class="product-meta">
+                                <span class="product-price">4,500,000 ₫</span>
+                                
+                                    <span class="product-stock">Còn: 5</span>
+                                
+                            </div>
+                            
+                            <div class="product-actions">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn minus" data-product-id="6">−</button>
+                                    <input type="number" class="qty-input" data-product-id="6" value="1" min="1" max="5">
+                                    <button class="qty-btn plus" data-product-id="6">+</button>
+                                </div>
+                                
+                                    <button class="btn-add-cart" data-product-id="6" data-product-name="Yonex Astrox 99" data-product-price="4500000.0">
+                                        🛒 Thêm vào giỏ
+                                    </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            
+                                <img src="/static/image/banner/BinhSport.png" alt="Yonex Nanoflare 700">
+                            
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Yonex Nanoflare 700</h3>
+                            <p class="product-description">Vợt thiên thủ, nhẹ...</p>
+                            <div class="product-meta">
+                                <span class="product-price">3,200,000 ₫</span>
+                                
+                                    <span class="product-stock">Còn: 7</span>
+                                
+                            </div>
+                            
+                            <div class="product-actions">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn minus" data-product-id="7">−</button>
+                                    <input type="number" class="qty-input" data-product-id="7" value="1" min="1" max="7">
+                                    <button class="qty-btn plus" data-product-id="7">+</button>
+                                </div>
+                                
+                                    <button class="btn-add-cart" data-product-id="7" data-product-name="Yonex Nanoflare 700" data-product-price="3200000.0">
+                                        🛒 Thêm vào giỏ
+                                    </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            
+                                <img src="/static/image/banner/BinhSport.png" alt="Yonex Arcsaber 11">
+                            
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Yonex Arcsaber 11</h3>
+                            <p class="product-description">Cân bằng công thủ...</p>
+                            <div class="product-meta">
+                                <span class="product-price">3,900,000 ₫</span>
+                                
+                                    <span class="product-stock">Còn: 6</span>
+                                
+                            </div>
+                            
+                            <div class="product-actions">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn minus" data-product-id="8">−</button>
+                                    <input type="number" class="qty-input" data-product-id="8" value="1" min="1" max="6">
+                                    <button class="qty-btn plus" data-product-id="8">+</button>
+                                </div>
+                                
+                                    <button class="btn-add-cart" data-product-id="8" data-product-name="Yonex Arcsaber 11" data-product-price="3900000.0">
+                                        🛒 Thêm vào giỏ
+                                    </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            
+                                <img src="/static/image/banner/BinhSport.png" alt="Yonex Astrox 88D">
+                            
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Yonex Astrox 88D</h3>
+                            <p class="product-description">Vợt chuyên đánh đôi...</p>
+                            <div class="product-meta">
+                                <span class="product-price">4,200,000 ₫</span>
+                                
+                                    <span class="product-stock">Còn: 4</span>
+                                
+                            </div>
+                            
+                            <div class="product-actions">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn minus" data-product-id="9">−</button>
+                                    <input type="number" class="qty-input" data-product-id="9" value="1" min="1" max="4">
+                                    <button class="qty-btn plus" data-product-id="9">+</button>
+                                </div>
+                                
+                                    <button class="btn-add-cart" data-product-id="9" data-product-name="Yonex Astrox 88D" data-product-price="4200000.0">
+                                        🛒 Thêm vào giỏ
+                                    </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            
+                                <img src="/static/image/banner/BinhSport.png" alt="Yonex Nanoray 10F">
+                            
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Yonex Nanoray 10F</h3>
+                            <p class="product-description">Phù hợp người mới...</p>
+                            <div class="product-meta">
+                                <span class="product-price">1,500,000 ₫</span>
+                                
+                                    <span class="product-stock">Còn: 10</span>
+                                
+                            </div>
+                            
+                            <div class="product-actions">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn minus" data-product-id="10">−</button>
+                                    <input type="number" class="qty-input" data-product-id="10" value="1" min="1" max="10">
+                                    <button class="qty-btn plus" data-product-id="10">+</button>
+                                </div>
+                                
+                                    <button class="btn-add-cart" data-product-id="10" data-product-name="Yonex Nanoray 10F" data-product-price="1500000.0">
+                                        🛒 Thêm vào giỏ
+                                    </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2026 BinhSport. Thương mại điện tử dụng cụ thể thao.</p>
+        <p>Thiết kế đẹp mắt, rõ ràng và thân thiện với người dùng.</p>
+    </footer>
+
+    <script src="/static/js/cart.js"></script>
+    <script src="/static/js/products.js"></script>
+</body>
+</html>

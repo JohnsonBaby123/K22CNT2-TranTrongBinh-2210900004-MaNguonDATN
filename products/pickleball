@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pickleball | BinhSport</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/products.css">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="/"> <span>Binh</span>Sport</a>
+        <nav class="main-nav">
+            <div class="nav-item dropdown">
+                <a href="#catalog" class="dropdown-toggle">📂 Danh mục</a>
+                <div class="dropdown-menu">
+                    <a href="/products/cau-long">🏸 Cầu lông</a>
+                    <a href="/products/bong-ban">🏓 Bóng bàn</a>
+                    <a href="/products/tennis">🎾 Tennis</a>
+                    <a href="/products/pickleball">🏏 Pickleball</a>
+                </div>
+            </div>
+            <a href="/#about">Về chúng tôi</a>
+        </nav>
+        <div class="header-actions">
+            <a href="/cart" class="cart-btn">🛒 Giỏ hàng <span id="cart-count" class="cart-count"></span></a>
+            <a class="btn login" href="/login">Đăng nhập</a>
+            <a class="btn signup" href="/register">Đăng ký</a>
+        </div>
+    </header>
+
+    <section class="products-hero">
+        <div class="products-hero-content">
+            <h1>Pickleball</h1>
+            <p>Khám phá bộ sưu tập đầy đủ về Pickleball</p>
+        </div>
+    </section>
+
+    <section class="products-section">
+        <div class="products-container">
+            <div class="products-grid">
+                
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            
+                                <img src="/static/image/banner/BinhSport.png" alt="Selkirk Amped S2">
+                            
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Selkirk Amped S2</h3>
+                            <p class="product-description">Vợt pickleball cao cấp, kiểm soát tốt...</p>
+                            <div class="product-meta">
+                                <span class="product-price">3,200,000 ₫</span>
+                                
+                                    <span class="product-stock">Còn: 10</span>
+                                
+                            </div>
+                            
+                            <div class="product-actions">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn minus" data-product-id="26">−</button>
+                                    <input type="number" class="qty-input" data-product-id="26" value="1" min="1" max="10">
+                                    <button class="qty-btn plus" data-product-id="26">+</button>
+                                </div>
+                                
+                                    <button class="btn-add-cart" data-product-id="26" data-product-name="Selkirk Amped S2" data-product-price="3200000.0">
+                                        🛒 Thêm vào giỏ
+                                    </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            
+                                <img src="/static/image/banner/BinhSport.png" alt="Paddletek Tempest Wave Pro">
+                            
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Paddletek Tempest Wave Pro</h3>
+                            <p class="product-description">Vợt thiên kiểm soát, phù hợp thi đấu...</p>
+                            <div class="product-meta">
+                                <span class="product-price">3,500,000 ₫</span>
+                                
+                                    <span class="product-stock">Còn: 7</span>
+                                
+                            </div>
+                            
+                            <div class="product-actions">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn minus" data-product-id="27">−</button>
+                                    <input type="number" class="qty-input" data-product-id="27" value="1" min="1" max="7">
+                                    <button class="qty-btn plus" data-product-id="27">+</button>
+                                </div>
+                                
+                                    <button class="btn-add-cart" data-product-id="27" data-product-name="Paddletek Tempest Wave Pro" data-product-price="3500000.0">
+                                        🛒 Thêm vào giỏ
+                                    </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            
+                                <img src="/static/image/banner/BinhSport.png" alt="Onix Z5 Graphite">
+                            
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Onix Z5 Graphite</h3>
+                            <p class="product-description">Vợt phổ biến, dễ chơi cho người mới...</p>
+                            <div class="product-meta">
+                                <span class="product-price">2,500,000 ₫</span>
+                                
+                                    <span class="product-stock">Còn: 12</span>
+                                
+                            </div>
+                            
+                            <div class="product-actions">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn minus" data-product-id="28">−</button>
+                                    <input type="number" class="qty-input" data-product-id="28" value="1" min="1" max="12">
+                                    <button class="qty-btn plus" data-product-id="28">+</button>
+                                </div>
+                                
+                                    <button class="btn-add-cart" data-product-id="28" data-product-name="Onix Z5 Graphite" data-product-price="2500000.0">
+                                        🛒 Thêm vào giỏ
+                                    </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            
+                                <img src="/static/image/banner/BinhSport.png" alt="Engage Encore Pro">
+                            
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Engage Encore Pro</h3>
+                            <p class="product-description">Vợt cân bằng giữa lực và kiểm soát...</p>
+                            <div class="product-meta">
+                                <span class="product-price">3,300,000 ₫</span>
+                                
+                                    <span class="product-stock">Còn: 8</span>
+                                
+                            </div>
+                            
+                            <div class="product-actions">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn minus" data-product-id="29">−</button>
+                                    <input type="number" class="qty-input" data-product-id="29" value="1" min="1" max="8">
+                                    <button class="qty-btn plus" data-product-id="29">+</button>
+                                </div>
+                                
+                                    <button class="btn-add-cart" data-product-id="29" data-product-name="Engage Encore Pro" data-product-price="3300000.0">
+                                        🛒 Thêm vào giỏ
+                                    </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            
+                                <img src="/static/image/banner/BinhSport.png" alt="Head Radical Elite">
+                            
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Head Radical Elite</h3>
+                            <p class="product-description">Vợt nhẹ, linh hoạt, dễ sử dụng...</p>
+                            <div class="product-meta">
+                                <span class="product-price">2,700,000 ₫</span>
+                                
+                                    <span class="product-stock">Còn: 9</span>
+                                
+                            </div>
+                            
+                            <div class="product-actions">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn minus" data-product-id="30">−</button>
+                                    <input type="number" class="qty-input" data-product-id="30" value="1" min="1" max="9">
+                                    <button class="qty-btn plus" data-product-id="30">+</button>
+                                </div>
+                                
+                                    <button class="btn-add-cart" data-product-id="30" data-product-name="Head Radical Elite" data-product-price="2700000.0">
+                                        🛒 Thêm vào giỏ
+                                    </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2026 BinhSport. Thương mại điện tử dụng cụ thể thao.</p>
+        <p>Thiết kế đẹp mắt, rõ ràng và thân thiện với người dùng.</p>
+    </footer>
+
+    <script src="/static/js/cart.js"></script>
+    <script src="/static/js/products.js"></script>
+</body>
+</html>

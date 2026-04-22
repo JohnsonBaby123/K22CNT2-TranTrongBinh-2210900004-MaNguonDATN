@@ -1,132 +1,76 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giỏ Hàng - BinhSport</title>
+    <title>Giỏ hàng | BinhSport</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
 </head>
 <body>
-    <!-- Header -->
     <header class="site-header">
-        <a class="brand" href="/"><span>Binh</span>Sport</a>
+        <a class="brand" href="/"> <span>Binh</span>Sport</a>
         <nav class="main-nav">
             <div class="nav-item dropdown">
-                <a href="/#catalog" class="dropdown-toggle">📂 Danh mục</a>
+                <a href="#catalog" class="dropdown-toggle">📂 Danh mục</a>
                 <div class="dropdown-menu">
-                    <a href="/#catalog">🏸 Cầu lông</a>
-                    <a href="/#catalog">🏓 Bóng bàn</a>
-                    <a href="/#catalog">🎾 Tennis</a>
-                    <a href="/#catalog">🏏 Pickleball</a>
+                    <a href="/products/cau-long">🏸 Cầu lông</a>
+                    <a href="/products/bong-ban">🏓 Bóng bàn</a>
+                    <a href="/products/tennis">🎾 Tennis</a>
+                    <a href="/products/pickleball">🏏 Pickleball</a>
                 </div>
             </div>
             <a href="/#about">Về chúng tôi</a>
         </nav>
         <div class="header-actions">
+            <a href="/cart" class="cart-btn">🛒 Giỏ hàng <span id="cart-count" class="cart-count"></span></a>
             <a class="btn login" href="/login">Đăng nhập</a>
             <a class="btn signup" href="/register">Đăng ký</a>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="cart-wrapper">
-            <!-- Cart Items Section -->
-            <div class="cart-section">
-                <h1>🛒 Giỏ Hàng</h1>
-                
-                <div id="emptyCart" class="empty-cart">
-                    <p>Giỏ hàng của bạn trống</p>
+    <section class="cart-hero">
+        <div class="cart-hero-content">
+            <h1>Giỏ hàng của bạn</h1>
+            <p>Xem lại và quản lý các sản phẩm đã chọn</p>
+        </div>
+    </section>
+
+    <section class="cart-section">
+        <div class="cart-container">
+            <div class="cart-content">
+                <div id="cartItems" class="cart-items">
+                    <!-- Các sản phẩm sẽ được thêm vào đây bằng JavaScript -->
+                </div>
+                <div id="emptyCart" class="empty-cart" style="display: none;">
+                    <p>🛒 Giỏ hàng của bạn trống rỗng</p>
                     <a href="/" class="btn signup">Tiếp tục mua sắm</a>
                 </div>
-
-                <div id="cartItems" class="cart-items" style="display: none;">
-                    <!-- Cart items will be populated here by JavaScript -->
-                </div>
             </div>
-
-            <!-- Cart Summary Section -->
-            <div class="cart-summary-section">
-                <div class="cart-summary">
-                    <h2>Tóm tắt đơn hàng</h2>
-                    
-                    <div class="summary-row">
-                        <span>Tổng số sản phẩm:</span>
-                        <span id="totalItems">0</span>
-                    </div>
-
-                    <div class="summary-row">
-                        <span>Tạm tính:</span>
-                        <span id="subtotal">0₫</span>
-                    </div>
-
-                    <div class="summary-row">
-                        <span>Phí vận chuyển:</span>
-                        <span id="shipping">Miễn phí</span>
-                    </div>
-
-                    <div class="summary-divider"></div>
-
-                    <div class="summary-row total">
-                        <span>Tổng cộng:</span>
-                        <span id="total">0₫</span>
-                    </div>
-
-                    <button id="checkoutBtn" class="btn-checkout" disabled>Thanh toán</button>
-                    <a href="/" class="btn-continue-shopping">Tiếp tục mua sắm</a>
+            <div id="cart-summary" class="cart-summary" style="display: none;">
+                <h3>Tóm tắt đơn hàng</h3>
+                <div class="summary-row">
+                    <span>Tổng số sản phẩm:</span>
+                    <span id="totalItems">0</span>
                 </div>
+                <div class="summary-row">
+                    <span>Tổng giá trị:</span>
+                    <span id="subtotal" class="subtotal-price">0 ₫</span>
+                </div>
+                <div class="summary-row">
+                    <span>Phí vận chuyển:</span>
+                    <span id="shipping" class="shipping-price">Miễn phí</span>
+                </div>
+                <div class="summary-row total-row">
+                    <span>Thành tiền:</span>
+                    <span id="total" class="total-price">0 ₫</span>
+                </div>
+                <button id="checkoutBtn" class="btn signup btn-checkout">Tiến hành thanh toán</button>
+                <a href="/" class="btn login" style="width: 100%; text-align: center; margin-top: 1rem;">Tiếp tục mua sắm</a>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Product Modal for Adding to Cart -->
-    <div id="productModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modalProductName">Tên sản phẩm</h2>
-                <button class="modal-close" onclick="closeProductModal()">✕</button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-product-info">
-                    <div>
-                        <p><strong>Giá:</strong> <span id="modalProductPrice">0₫</span></p>
-                        <p><strong>Mô tả:</strong> <span id="modalProductDesc">Mô tả sản phẩm</span></p>
-                    </div>
-                    <div class="modal-quantity">
-                        <label for="modalQuantity">Số lượng:</label>
-                        <div class="quantity-control">
-                            <button onclick="decreaseModalQuantity()">−</button>
-                            <input type="number" id="modalQuantity" value="1" min="1">
-                            <button onclick="increaseModalQuantity()">+</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn-cancel" onclick="closeProductModal()">Hủy</button>
-                <button class="btn-add-to-cart" onclick="addFromModal()">Thêm vào giỏ</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Quick Add Product Section (for testing) -->
-    <div class="quick-add-section" style="display: none;">
-        <h3>Thêm nhanh sản phẩm từ DB</h3>
-        <select id="productSelect">
-            <option value="">-- Chọn sản phẩm --</option>
-            {% if products %}
-                {% for product in products %}
-                    <option value="{{ product[0] }}" data-name="{{ product[1] }}" data-price="{{ product[3] }}">
-                        {{ product[1] }} - {{ product[3] }}₫
-                    </option>
-                {% endfor %}
-            {% endif %}
-        </select>
-        <button onclick="quickAddProduct()">Thêm</button>
-    </div>
-
-    <!-- Footer -->
     <footer class="footer">
         <p>© 2026 BinhSport. Thương mại điện tử dụng cụ thể thao.</p>
         <p>Thiết kế đẹp mắt, rõ ràng và thân thiện với người dùng.</p>

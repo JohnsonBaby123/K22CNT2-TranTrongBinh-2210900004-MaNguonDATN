@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, jsonify
+﻿from flask import Flask, render_template, request, redirect, jsonify
 import mysql.connector
 import json
 
@@ -77,6 +77,37 @@ def cart():
         conn.close()
         
         return render_template("cart.html", products=products)
+    except Exception as e:
+        return f"Lỗi kết nối DB: {e}"
+
+# 📦 Trang sản phẩm theo danh mục
+@app.route("/products/<category_slug>")
+def products(category_slug):
+    try:
+        # Mapping danh mục
+        category_mapping = {
+            "cau-long": ("Cầu lông", 1),
+            "bong-ban": ("Bóng bàn", 2),
+            "tennis": ("Tennis", 3),
+            "pickleball": ("Pickleball", 4)
+        }
+        
+        if category_slug not in category_mapping:
+            return redirect("/")
+        
+        category_name, category_id = category_mapping[category_slug]
+        
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        
+        cursor.execute("SELECT * FROM product WHERE category_id = %s", (category_id,))
+        products_list = cursor.fetchall()
+        
+        cursor.close()
+        conn.close()
+        
+        return render_template("products.html", category_name=category_name, products=products_list)
+    
     except Exception as e:
         return f"Lỗi kết nối DB: {e}"
 

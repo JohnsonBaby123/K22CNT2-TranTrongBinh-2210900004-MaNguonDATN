@@ -1,4 +1,9 @@
 const CART_STORAGE_KEY = 'binksport_cart';
+const VOUCHERS = {
+    SPORT10: 0.10,
+    SPORT20: 0.20,
+    SPORT30: 0.30
+};
 
 function getCart() {
     const cart = localStorage.getItem(CART_STORAGE_KEY);
@@ -27,11 +32,51 @@ function saveCart(cart) {
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
 }
 
+function getSelectedPaymentMethod() {
+    const selected = document.querySelector('input[name="paymentMethod"]:checked');
+    return selected ? selected.value : 'cod';
+}
+
+function getSelectedVoucher() {
+    const voucherSelect = document.getElementById('voucherCode');
+    return voucherSelect ? voucherSelect.value : '';
+}
+
+function getDiscountRate(voucherCode) {
+    return VOUCHERS[voucherCode] || 0;
+}
+
+function calculateCheckoutTotals(items) {
+    let totalQuantity = 0;
+    let subtotal = 0;
+
+    items.forEach(item => {
+        totalQuantity += item.quantity;
+        subtotal += item.price * item.quantity;
+    });
+
+    const voucherCode = getSelectedVoucher();
+    const discountRate = getDiscountRate(voucherCode);
+    const discountAmount = Math.round(subtotal * discountRate);
+    const total = subtotal - discountAmount;
+
+    return {
+        totalQuantity,
+        subtotal,
+        discountAmount,
+        total,
+        voucherCode,
+        paymentMethod: getSelectedPaymentMethod()
+    };
+}
+
 function renderCheckout() {
     const items = getCheckoutItems();
     const emptyBox = document.getElementById('checkoutEmpty');
     const contentBox = document.getElementById('checkoutContent');
     const itemsContainer = document.getElementById('checkoutItems');
+    const voucherSelect = document.getElementById('voucherCode');
+    const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
 
     if (!items.length) {
         emptyBox.style.display = 'block';
@@ -43,12 +88,7 @@ function renderCheckout() {
     contentBox.style.display = 'block';
     itemsContainer.innerHTML = '';
 
-    let totalQuantity = 0;
-    let totalAmount = 0;
-
     items.forEach(item => {
-        totalQuantity += item.quantity;
-        totalAmount += item.price * item.quantity;
 
         const row = document.createElement('div');
         row.className = 'checkout-item';
@@ -60,8 +100,23 @@ function renderCheckout() {
         itemsContainer.appendChild(row);
     });
 
-    document.getElementById('summaryQuantity').textContent = totalQuantity;
-    document.getElementById('summaryTotal').textContent = formatPrice(totalAmount);
+    const updateSummaryView = () => {
+        const totals = calculateCheckoutTotals(items);
+        document.getElementById('summaryQuantity').textContent = totals.totalQuantity;
+        document.getElementById('summarySubtotal').textContent = formatPrice(totals.subtotal);
+        document.getElementById('summaryDiscount').textContent = `-${formatPrice(totals.discountAmount)}`;
+        document.getElementById('summaryTotal').textContent = formatPrice(totals.total);
+    };
+
+    updateSummaryView();
+
+    if (voucherSelect) {
+        voucherSelect.addEventListener('change', updateSummaryView, { once: false });
+    }
+
+    paymentMethods.forEach(method => {
+        method.addEventListener('change', updateSummaryView, { once: false });
+    });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -84,7 +139,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     items: checkoutItems.map(item => ({
                         id: item.id,
                         quantity: item.quantity
-                    }))
+                    })),
+                    payment_method: getSelectedPaymentMethod(),
+                    voucher_code: getSelectedVoucher()
                 };
 
                 const response = await fetch('/api/checkout', {
@@ -103,7 +160,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const updatedCart = getCart().filter(item => !paidIds.has(item.id));
                 saveCart(updatedCart);
 
-                alert(`Đặt hàng thành công! Mã đơn hàng: #${result.order_id}`);
+                const paymentLabel = result.payment_method === 'online' ? 'online' : 'khi nhận hàng';
+                alert(`Đặt hàng thành công!\nMã đơn hàng: #${result.order_id}\nPhương thức: Thanh toán ${paymentLabel}\nTổng sau giảm giá: ${formatPrice(result.total)}`);
                 window.location.href = '/';
             } catch (error) {
                 alert(error.message || 'Có lỗi khi đặt hàng');

@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCartCount();
     setupQuantityButtons();
     setupAddToCartButtons();
+    setupDetailButtons();
 });
 
 // Cập nhật số lượng giỏ hàng
@@ -15,6 +16,59 @@ function updateCartCount() {
         cartCountElement.textContent = cartCount;
         cartCountElement.style.display = 'block';
     }
+}
+
+// Setup nút xem chi tiết
+function setupDetailButtons() {
+    const detailButtons = document.querySelectorAll('.btn-view-details');
+    detailButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const productId = this.dataset.productId;
+            if (!productId) return;
+            fetch(`/api/product/${productId}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        showNotification('Không thể tải thông tin sản phẩm');
+                        return;
+                    }
+
+                    const product = data;
+                    const tbody = document.getElementById('modal-specs-tbody');
+                    const modalName = document.getElementById('modal-product-name');
+                    tbody.innerHTML = '';
+
+                    function addRow(label, value) {
+                        const tr = document.createElement('tr');
+                        tr.style.borderTop = '1px solid #eee';
+                        tr.innerHTML = `<td style="padding:8px; font-weight:600; width:35%;">${label}</td><td style="padding:8px;">${value !== null && value !== undefined ? value : ''}</td>`;
+                        tbody.appendChild(tr);
+                    }
+
+                    modalName.textContent = product.name || 'Thông số sản phẩm';
+                    addRow('Mã sản phẩm', product.id || '');
+                    addRow('Tên', product.name || '');
+                    addRow('Danh mục', product.category_name || product.category_id || '');
+                    addRow('Giá', product.price ? new Intl.NumberFormat('vi-VN').format(product.price) + ' ₫' : '');
+                    addRow('Tồn kho', product.stock != null ? product.stock : '');
+                    // Material field - prefer 'material' or 'chất liệu' fields if present
+                    const material = product.material || product.materials || product.spec_material || product.chatlieu || '';
+                    addRow('Chất liệu', material || 'Không xác định');
+                    addRow('Mô tả', product.description || '');
+
+                    // Show modal
+                    const modal = document.getElementById('product-modal');
+                    if (modal) modal.style.display = 'flex';
+
+                    // Close handlers
+                    const closeBtn = document.getElementById('product-modal-close');
+                    if (closeBtn) closeBtn.onclick = () => { modal.style.display = 'none'; };
+                    modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+                    document.addEventListener('keydown', function escListener(ev) { if (ev.key === 'Escape') { modal.style.display = 'none'; document.removeEventListener('keydown', escListener); } });
+                })
+                .catch(() => showNotification('Lỗi mạng khi tải thông tin sản phẩm'));
+        });
+    });
 }
 
 // Setup nút tăng/giảm số lượng

@@ -386,31 +386,9 @@ class RegisterForm {
                 return;
             }
 
-            // Show loading state
+            // Show loading state rồi submit thật lên backend để lưu DB
             this.setLoading(true);
-
-            // Prepare form data
-            const formData = new FormData(this.form);
-            const registerData = {
-                first_name: formData.get('first_name'),
-                last_name: formData.get('last_name'),
-                email: formData.get('email'),
-                username: formData.get('username'),
-                password: formData.get('password'),
-                phone: formData.get('phone') || null
-            };
-
-            // Simulate API call
-            await this.delay(2000);
-
-            // For demo purposes, accept registration
-            // In real app, this would be an actual API call
-            this.showSuccess('Đăng ký thành công! Đang chuyển hướng đến trang đăng nhập...');
-
-            // Redirect to login page
-            setTimeout(() => {
-                window.location.href = '/login';
-            }, 2000);
+            this.form.submit();
 
         } catch (error) {
             console.error('Registration error:', error);
@@ -425,12 +403,6 @@ class RegisterForm {
             this.submitBtn.disabled = loading;
             this.submitBtn.textContent = loading ? 'Đang đăng ký...' : 'Đăng ký';
         }
-
-        // Disable form inputs during loading
-        const inputs = this.form?.querySelectorAll('input') || [];
-        inputs.forEach(input => {
-            input.disabled = loading;
-        });
     }
 
     showError(message) {

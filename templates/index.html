@@ -21,11 +21,18 @@
             </div>
             <a href="#about">Giới thiệu</a>
         </nav>
+        
+        <!-- Search Bar -->
+        <form action="/search" method="GET" class="header-search">
+            <input type="text" name="q" placeholder="🔍 Tìm sản phẩm...">
+            <button type="submit">Tìm</button>
+        </form>
+        
         <div class="header-actions">
             <a href="/cart" class="cart-btn">🛒 Giỏ hàng <span id="cart-count" class="cart-count"></span></a>
             {% if session.get('user_id') %}
                 <span class="btn login">Xin chào, {{ session.get('username') }}</span>
-                <a class="btn signup" href="/logout">Đăng xuất</a>
+                <a class="btn signup" href="/logout" onclick="return confirm('Bạn có muốn đăng xuất?')">Đăng xuất</a>
             {% else %}
                 <a class="btn login" href="/login">Đăng nhập</a>
                 <a class="btn signup" href="/register">Đăng ký</a>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm kiếm sản phẩm | BinhSport</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/products.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="/"> <span>Binh</span>Sport</a>
+        <nav class="main-nav">
+            <div class="nav-item dropdown">
+                <a href="#catalog" class="dropdown-toggle">📂 Danh mục</a>
+                <div class="dropdown-menu">
+                    <a href="/products/cau-long">🏸 Cầu lông</a>
+                    <a href="/products/bong-ban">🏓 Bóng bàn</a>
+                    <a href="/products/tennis">🎾 Tennis</a>
+                    <a href="/products/pickleball">🏏 Pickleball</a>
+                </div>
+            </div>
+            <a href="/#about">Về chúng tôi</a>
+        </nav>
+        <div class="header-actions">
+            <a href="/cart" class="cart-btn">🛒 Giỏ hàng <span id="cart-count" class="cart-count"></span></a>
+            <a class="btn login" href="/login">Đăng nhập</a>
+            <a class="btn signup" href="/register">Đăng ký</a>
+        </div>
+    </header>
+
+    <section class="products-hero">
+        <div class="products-hero-content">
+            <h1>🔍 Tìm kiếm sản phẩm</h1>
+            <p>Kết quả tìm kiếm cho "{{ search }}"</p>
+        </div>
+    </section>
+
+    <!-- Search & Filter Section -->
+    <section class="filter-section">
+        <div class="filter-container">
+            <form method="GET" action="/search" class="filter-form">
+                <div class="filter-row">
+                    <div class="filter-group search-group">
+                        <label for="q">🔍 Tìm kiếm:</label>
+                        <input type="text" id="q" name="q" placeholder="Tên sản phẩm..." value="{{ search }}">
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="category">📂 Danh mục:</label>
+                        <select id="category" name="category">
+                            <option value="all" {% if category == 'all' %}selected{% endif %}>Tất cả</option>
+                            <option value="cau-long" {% if category == 'cau-long' %}selected{% endif %}>Cầu lông</option>
+                            <option value="bong-ban" {% if category == 'bong-ban' %}selected{% endif %}>Bóng bàn</option>
+                            <option value="tennis" {% if category == 'tennis' %}selected{% endif %}>Tennis</option>
+                            <option value="pickleball" {% if category == 'pickleball' %}selected{% endif %}>Pickleball</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="min_price">💰 Giá từ:</label>
+                        <input type="number" id="min_price" name="min_price" placeholder="Min" value="{{ min_price }}" min="0">
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="max_price">💰 Đến:</label>
+                        <input type="number" id="max_price" name="max_price" placeholder="Max" value="{{ max_price }}" min="0">
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="min_qty">🔢 Số lượng từ:</label>
+                        <input type="number" id="min_qty" name="min_qty" placeholder="1" value="{{ min_qty }}" min="1" max="99">
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="max_qty">🔢 Đến:</label>
+                        <input type="number" id="max_qty" name="max_qty" placeholder="99" value="{{ max_qty }}" min="1" max="99">
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="sort">📊 Sắp xếp:</label>
+                        <select id="sort" name="sort">
+                            <option value="relevance" {% if sort_by == 'relevance' %}selected{% endif %}>Liên quan</option>
+                            <option value="price_asc" {% if sort_by == 'price_asc' %}selected{% endif %}>Giá: Thấp → Cao</option>
+                            <option value="price_desc" {% if sort_by == 'price_desc' %}selected{% endif %}>Giá: Cao → Thấp</option>
+                            <option value="name" {% if sort_by == 'name' %}selected{% endif %}>Tên A → Z</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-actions">
+                        <button type="submit" class="btn-filter">Tìm</button>
+                        <a href="/search" class="btn-clear">Xóa lọc</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="products-section">
+        <div class="products-container">
+            <div class="results-info">
+                <p>Tìm thấy <strong>{{ products|length }}</strong> sản phẩm</p>
+            </div>
+            
+            <div class="products-grid">
+                {% if products %}
+                    {% for product in products %}
+                    <div class="product-card">
+                        <div class="product-image">
+                            {% if product.image %}
+                                <img src="{{ url_for('static', filename='image/products/' + product.image) }}" alt="{{ product.name }}">
+                            {% else %}
+                                <img src="{{ url_for('static', filename='image/banner/BinhSport.png') }}" alt="{{ product.name }}">
+                            {% endif %}
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">{{ product.name }}</h3>
+                            <p class="product-category">{{ product.category_name }}</p>
+                            <p class="product-description">{{ product.description[:100] if product.description else 'Sản phẩm chất lượng cao' }}...</p>
+
+                            <div class="product-meta">
+                                <div class="product-price-section">
+                                    <span class="product-price">{{ "{:,.0f}".format(product.price) }} ₫</span>
+                                    {% if product.stock > 0 %}
+                                        <span class="product-stock">Còn: {{ product.stock }}</span>
+                                    {% else %}
+                                        <span class="product-stock out-of-stock">Hết hàng</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="product-actions">
+                                {% if product.stock > 0 %}
+                                    <div class="quantity-section">
+                                        <label for="qty-{{ product.id }}" class="quantity-label">Số lượng:</label>
+                                        <div class="quantity-selector">
+                                            <button class="qty-btn minus" data-product-id="{{ product.id }}">-</button>
+                                            <input type="number" id="qty-{{ product.id }}" class="qty-input" data-product-id="{{ product.id }}" value="1" min="1" max="{{ product.stock }}">
+                                            <button class="qty-btn plus" data-product-id="{{ product.id }}">+</button>
+                                        </div>
+                                    </div>
+                                    <button class="btn-add-cart" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}" data-product-price="{{ product.price }}">
+                                        🛒 Thêm vào giỏ hàng
+                                    </button>
+                                {% else %}
+                                    <button class="btn-add-cart disabled" disabled>
+                                        Hết hàng
+                                    </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-products">
+                        <p>Không tìm thấy sản phẩm nào phù hợp.</p>
+                        <p>Thử thay đổi từ khóa hoặc bộ lọc khác.</p>
+                        <a href="/" class="btn signup">Quay lại trang chủ</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2026 BinhSport. Thương mại điện tử dụng cụ thể thao.</p>
+        <p>Thiết kế đẹp mắt, rõ ràng và thân thiện với người dùng.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/products.js') }}"></script>
+</body>
+</html>

@@ -3,6 +3,9 @@ USE BinhSport;
 
 CREATE TABLE User (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    phone VARCHAR(20),
     username VARCHAR(50),
     password VARCHAR(255),
     email VARCHAR(100),
@@ -160,8 +163,10 @@ INSERT INTO Cart (user_id) VALUES (2);
 SELECT*FROM product
 SELECT*FROM productattribute
 SELECT*FROM category
-SELECT*FROM cart
+SELECT*FROM cartitem
 SELECT*FROM user
+SELECT*FROM OrderTable
+SELECT*FROM cart 
 
 -- Cầu lông 
 UPDATE Product SET image = 'cl1.jpg' WHERE id = 6;
@@ -190,3 +195,20 @@ UPDATE Product SET image = 'pkb2.jpg' WHERE id = 27;
 UPDATE Product SET image = 'pkb3.jpg' WHERE id = 28;
 UPDATE Product SET image = 'pkb4.jpg' WHERE id = 29;
 UPDATE Product SET image = 'pkb5.jpg' WHERE id = 30;
+
+ALTER TABLE product
+ADD COLUMN chat_lieu VARCHAR (255);
+
+UPDATE Product SET chat_lieu = 'Graphite cao cấp' WHERE id = 21; -- Wilson Pro Staff RF97
+UPDATE Product SET chat_lieu = 'Graphite + Carbon Fiber' WHERE id = 22; -- Babolat Pure Drive
+UPDATE Product SET chat_lieu = 'Graphite + Kevlar' WHERE id = 23; -- Head Speed MP
+UPDATE Product SET chat_lieu = 'HM Graphite' WHERE id = 24; -- Yonex Ezone 98
+UPDATE Product SET chat_lieu = 'Graphite + Textreme Carbon' WHERE id = 25; -- Prince Textreme
+
+UPDATE Product SET chat_lieu = 'Composite + Polymer Core' WHERE id = 26; -- Selkirk Amped S2
+UPDATE Product SET chat_lieu = 'Carbon Fiber + Polymer Core' WHERE id = 27; -- Tempest Wave Pro
+UPDATE Product SET chat_lieu = 'Graphite + Nomex Core' WHERE id = 28; -- Onix Z5
+UPDATE Product SET chat_lieu = 'Composite + Polymer Core' WHERE id = 29; -- Engage Encore
+UPDATE Product SET chat_lieu = 'Fiberglass + Polymer Core' WHERE id = 30; -- Head Radical Elite
+
+SELECT*FROM product 

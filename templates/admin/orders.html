@@ -26,6 +26,10 @@
         .topbar { background: #1a1f2e; border-bottom: 1px solid #2a3342; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; }
         .content { flex: 1; overflow-y: auto; padding: 2rem; }
         .content-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+        .flash-messages { margin-bottom: 1rem; display: grid; gap: 0.75rem; }
+        .flash-message { padding: 0.85rem 1rem; border-radius: 8px; border: 1px solid transparent; }
+        .flash-message.success { background: rgba(34, 197, 94, 0.12); color: #22c55e; border-color: rgba(34, 197, 94, 0.35); }
+        .flash-message.error { background: rgba(239, 68, 68, 0.12); color: #ef4444; border-color: rgba(239, 68, 68, 0.35); }
         .table-container { background: #1a1f2e; border: 1px solid #2a3342; border-radius: 8px; overflow: hidden; }
         table { width: 100%; border-collapse: collapse; }
         thead { background: #151a25; border-bottom: 2px solid #2a3342; }
@@ -78,7 +82,7 @@
                         <p class="role">Quản trị viên</p>
                     </div>
                 </div>
-                <form action="/logout" method="get">
+                <form action="/logout" method="get" onsubmit="return confirm('Bạn có muốn đăng xuất?')">
                     <button type="submit" class="logout-btn">Đăng xuất</button>
                 </form>
             </div>
@@ -94,6 +98,16 @@
                 <div class="content-header">
                     <h3>Danh sách đơn hàng</h3>
                 </div>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <div class="flash-message {{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
 
                 <div class="table-container">
                     {% if orders %}

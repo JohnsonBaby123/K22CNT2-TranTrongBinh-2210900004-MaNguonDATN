@@ -17,7 +17,7 @@
         <div class="header-actions">
             {% if session.get('user_id') %}
                 <span class="btn login">Xin chào, {{ session.get('username') }}</span>
-                <a class="btn signup" href="/logout">Đăng xuất</a>
+                    <a class="btn signup" href="/logout" onclick="return confirm('Bạn có muốn đăng xuất?')">Đăng xuất</a>
             {% else %}
                 <a class="btn login" href="/login">Đăng nhập</a>
                 <a class="btn signup" href="/register">Đăng ký</a>
@@ -38,13 +38,49 @@
             <div id="checkoutContent" style="display: none;">
                 <div id="checkoutItems" class="checkout-items"></div>
 
+                <div class="checkout-options">
+                    <div class="option-group">
+                        <h3>Phương thức thanh toán</h3>
+                        <div class="payment-methods">
+                            <label class="payment-method">
+                                <input type="radio" name="paymentMethod" value="cod" checked>
+                                <span>Thanh toán khi nhận hàng</span>
+                            </label>
+                            <label class="payment-method">
+                                <input type="radio" name="paymentMethod" value="online">
+                                <span>Thanh toán online</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <h3>Voucher giảm giá</h3>
+                        <label for="voucherCode" class="voucher-label">Chọn mã giảm giá</label>
+                        <select id="voucherCode" class="voucher-select">
+                            <option value="">Không áp dụng</option>
+                            <option value="SPORT10">SPORT10 - Giảm 10%</option>
+                            <option value="SPORT20">SPORT20 - Giảm 20%</option>
+                            <option value="SPORT30">SPORT30 - Giảm 30%</option>
+                        </select>
+                        <p class="voucher-note">Mã giảm giá chỉ áp dụng cho tổng tiền sản phẩm, tối đa 30%.</p>
+                    </div>
+                </div>
+
                 <div class="checkout-summary">
                     <div class="row">
                         <span>Tổng sản phẩm</span>
                         <strong id="summaryQuantity">0</strong>
                     </div>
+                    <div class="row">
+                        <span>Tạm tính</span>
+                        <strong id="summarySubtotal">0₫</strong>
+                    </div>
+                    <div class="row">
+                        <span>Giảm giá</span>
+                        <strong id="summaryDiscount">-0₫</strong>
+                    </div>
                     <div class="row total">
-                        <span>Tổng thanh toán</span>
+                        <span>Thành tiền</span>
                         <strong id="summaryTotal">0₫</strong>
                     </div>
                 </div>

@@ -1,6 +1,96 @@
 // ===== CART STORAGE =====
 const CART_STORAGE_KEY = 'binksport_cart';
 
+function toLocalCartItem(serverItem) {
+    return {
+        id: serverItem.id,
+        name: serverItem.name,
+        price: Number(serverItem.price),
+        quantity: Number(serverItem.quantity),
+        image: serverItem.image || null
+    };
+}
+
+async function fetchCartFromServer() {
+    try {
+        const response = await fetch('/api/cart', { credentials: 'same-origin' });
+        if (!response.ok) {
+            return null;
+        }
+
+        return await response.json();
+    } catch (error) {
+        return null;
+    }
+}
+
+async function hydrateCartFromServer() {
+    const serverCart = await fetchCartFromServer();
+    if (!serverCart || !Array.isArray(serverCart.items) || serverCart.items.length === 0) {
+        return;
+    }
+
+    const localCart = getCart();
+    if (localCart.length === 0) {
+        saveCart(serverCart.items.map(toLocalCartItem));
+    }
+}
+
+async function syncCartAddToServer(productId, quantity) {
+    try {
+        const response = await fetch('/api/cart/items', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ product_id: productId, quantity: quantity })
+        });
+
+        if (!response.ok) {
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+async function syncCartUpdateToServer(productId, quantity) {
+    try {
+        const response = await fetch(`/api/cart/items/${encodeURIComponent(productId)}`, {
+            method: 'PATCH',
+            credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ quantity: quantity })
+        });
+
+        if (!response.ok) {
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+async function syncCartRemoveFromServer(productId) {
+    try {
+        const response = await fetch(`/api/cart/items/${encodeURIComponent(productId)}`, {
+            method: 'DELETE',
+            credentials: 'same-origin'
+        });
+
+        if (!response.ok) {
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
 // Get cart from localStorage
 function getCart() {
     const cart = localStorage.getItem(CART_STORAGE_KEY);
@@ -32,6 +122,7 @@ function addToCart(productId, productName, productPrice, quantity = 1) {
     }
     
     saveCart(cart);
+    void syncCartAddToServer(productId, quantity);
     showCartNotification(`Đã thêm ${quantity} "${productName}" vào giỏ hàng`);
 }
 
@@ -40,6 +131,7 @@ function removeFromCart(productId) {
     let cart = getCart();
     cart = cart.filter(item => item.id !== productId);
     saveCart(cart);
+    void syncCartRemoveFromServer(productId);
 }
 
 // Checkout one selected item
@@ -66,6 +158,7 @@ function updateQuantity(productId, quantity) {
         } else {
             item.quantity = quantity;
             saveCart(cart);
+            void syncCartUpdateToServer(productId, quantity);
         }
     }
 }
@@ -75,23 +168,26 @@ function updateCartDisplay() {
     const cart = getCart();
     const cartItemsContainer = document.getElementById('cartItems');
     const emptyCartMessage = document.getElementById('emptyCart');
+    const cartSummary = document.getElementById('cart-summary');
     const checkoutBtn = document.getElementById('checkoutBtn');
     const totalItemsEl = document.getElementById('totalItems');
     const subtotalEl = document.getElementById('subtotal');
     const totalEl = document.getElementById('total');
 
     // Nếu không phải trang cart thì chỉ bỏ qua phần render chi tiết
-    if (!cartItemsContainer || !emptyCartMessage || !checkoutBtn || !totalItemsEl || !subtotalEl || !totalEl) {
+    if (!cartItemsContainer || !emptyCartMessage || !cartSummary || !checkoutBtn || !totalItemsEl || !subtotalEl || !totalEl) {
         return;
     }
     
     if (cart.length === 0) {
         cartItemsContainer.style.display = 'none';
         emptyCartMessage.style.display = 'block';
+        cartSummary.style.display = 'none';
         checkoutBtn.disabled = true;
     } else {
         cartItemsContainer.style.display = 'block';
         emptyCartMessage.style.display = 'none';
+        cartSummary.style.display = 'block';
         checkoutBtn.disabled = false;
         renderCartItems(cart);
     }
@@ -145,6 +241,7 @@ function decreaseQuantity(productId) {
         if (item.quantity > 1) {
             item.quantity--;
             saveCart(cart);
+            void syncCartUpdateToServer(productId, item.quantity);
         } else {
             removeFromCart(productId);
         }
@@ -159,6 +256,7 @@ function increaseQuantity(productId) {
     if (item) {
         item.quantity++;
         saveCart(cart);
+        void syncCartUpdateToServer(productId, item.quantity);
     }
 }
 
@@ -296,7 +394,9 @@ function quickAddProduct() {
 
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', function() {
-    updateCartDisplay();
+    hydrateCartFromServer().finally(() => {
+        updateCartDisplay();
+    });
     
     // Close modal when clicking outside
     document.getElementById('productModal').addEventListener('click', function(e) {

@@ -16,6 +16,18 @@
             <h1>Đăng nhập</h1>
             <p class="subtitle">Đăng nhập để tiếp tục mua sắm sản phẩm thể thao yêu thích của bạn.</p>
 
+            {% if message %}
+                <div style="margin: 0.75rem 0 1rem; padding: 0.75rem 1rem; border-radius: 10px; background: rgba(34, 197, 94, 0.12); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.35);">
+                    {{ message }}
+                </div>
+            {% endif %}
+
+            {% if error %}
+                <div style="margin: 0.75rem 0 1rem; padding: 0.75rem 1rem; border-radius: 10px; background: rgba(239, 68, 68, 0.12); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.35);">
+                    {{ error }}
+                </div>
+            {% endif %}
+
             <form method="POST" action="{{ url_for('login', next=request.args.get('next')) }}">
                 <input type="hidden" name="next" value="{{ request.args.get('next', '') }}">
                 <div class="form-group">

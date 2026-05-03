@@ -26,7 +26,7 @@
             <a href="/cart" class="cart-btn">🛒 Giỏ hàng <span id="cart-count" class="cart-count"></span></a>
             {% if session.get('user_id') %}
                 <span class="btn login">Xin chào, {{ session.get('username') }}</span>
-                <a class="btn signup" href="/logout">Đăng xuất</a>
+                <a class="btn signup" href="/logout" onclick="return confirm('Bạn có muốn đăng xuất?')">Đăng xuất</a>
             {% else %}
                 <a class="btn login" href="/login">Đăng nhập</a>
                 <a class="btn signup" href="/register">Đăng ký</a>
@@ -35,50 +35,93 @@
     </header>
 
     <section class="cart-hero">
-        <div class="cart-hero-content" style="max-width: 720px; margin: 0 auto; text-align: center; padding: 0 1rem;">
-            <h1 style="margin-bottom: 0.75rem;">Giỏ hàng của bạn</h1>
-            <p style="margin: 0;">Xem lại và quản lý các sản phẩm đã chọn</p>
+        <div class="cart-hero-content">
+            <div class="cart-hero-copy">
+                <span class="cart-hero-kicker">Tổng quan đơn hàng</span>
+                <h1>Giỏ hàng của bạn</h1>
+                <p>Xem lại sản phẩm đã chọn, điều chỉnh số lượng và tiến hành thanh toán chỉ trong vài bước.</p>
+            </div>
+            <div class="cart-hero-meta">
+                <div class="hero-metric">
+                    <span class="metric-label">Vận chuyển</span>
+                    <strong>Miễn phí</strong>
+                </div>
+                <div class="hero-metric">
+                    <span class="metric-label">Thanh toán</span>
+                    <strong>An toàn</strong>
+                </div>
+                <div class="hero-metric">
+                    <span class="metric-label">Hỗ trợ</span>
+                    <strong>24/7</strong>
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="cart-section">
         <div class="cart-container">
             <div class="cart-content">
+                <div class="cart-panel-header">
+                    <div>
+                        <span class="section-label">Sản phẩm</span>
+                        <h2>Danh sách đã chọn</h2>
+                    </div>
+                    <p class="cart-note">Các thay đổi về số lượng sẽ được cập nhật ngay sau khi bạn chỉnh sửa.</p>
+                </div>
+
                 <div id="cartItems" class="cart-items">
                     <!-- Các sản phẩm sẽ được thêm vào đây bằng JavaScript -->
                 </div>
+
                 <div id="emptyCart" class="empty-cart" style="display: none;">
-                    <p>🛒 Giỏ hàng của bạn trống rỗng</p>
+                    <div class="empty-cart-icon">🛒</div>
+                    <h3>Giỏ hàng của bạn đang trống</h3>
+                    <p>Hãy thêm vài sản phẩm thể thao phù hợp để bắt đầu mua sắm.</p>
                     <a href="/" class="btn signup">Tiếp tục mua sắm</a>
                 </div>
             </div>
             <div id="cart-summary" class="cart-summary" style="display: none;">
-                <h3>Tóm tắt đơn hàng</h3>
-                <div class="summary-row">
-                    <span>Tổng số sản phẩm:</span>
-                    <span id="totalItems">0</span>
+                <div class="summary-header">
+                    <span class="section-label">Thanh toán</span>
+                    <h3>Tóm tắt đơn hàng</h3>
                 </div>
-                <div class="summary-row">
-                    <span>Tổng giá trị:</span>
-                    <span id="subtotal" class="subtotal-price">0 ₫</span>
+
+                <div class="summary-card">
+                    <div class="summary-row">
+                        <span>Tổng số sản phẩm</span>
+                        <strong id="totalItems">0</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tổng giá trị</span>
+                        <strong id="subtotal" class="subtotal-price">0 ₫</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Phí vận chuyển</span>
+                        <strong id="shipping" class="shipping-price">Miễn phí</strong>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-row total-row">
+                        <span>Thành tiền</span>
+                        <strong id="total" class="total-price">0 ₫</strong>
+                    </div>
                 </div>
-                <div class="summary-row">
-                    <span>Phí vận chuyển:</span>
-                    <span id="shipping" class="shipping-price">Miễn phí</span>
+
+                <div class="summary-actions">
+                    <button id="checkoutBtn" type="button" class="btn signup btn-checkout" onclick="window.location.href='/checkout'">Tiến hành thanh toán</button>
+                    <a href="/" class="btn login btn-continue">Tiếp tục mua sắm</a>
                 </div>
-                <div class="summary-row total-row">
-                    <span>Thành tiền:</span>
-                    <span id="total" class="total-price">0 ₫</span>
+
+                <div class="summary-assurance">
+                    <span>✓ Bảo mật giao dịch</span>
+                    <span>✓ Hỗ trợ đổi trả</span>
                 </div>
-                <button id="checkoutBtn" class="btn signup btn-checkout">Tiến hành thanh toán</button>
-                <a href="/" class="btn login" style="width: 100%; text-align: center; margin-top: 1rem;">Tiếp tục mua sắm</a>
             </div>
         </div>
     </section>
 
     <footer class="footer">
         <p>© 2026 BinhSport. Thương mại điện tử dụng cụ thể thao.</p>
-        <p>Thiết kế đẹp mắt, rõ ràng và thân thiện với người dùng.</p>
+        <p>Mua sắm gọn gàng, rõ ràng và an toàn hơn.</p>
     </footer>
 
     <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
